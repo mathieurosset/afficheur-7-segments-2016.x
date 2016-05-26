@@ -8,13 +8,33 @@ static unsigned char digits[2];
 static char ascii7Segments[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};
 
 void afficheurEtablitDigits(char nombre) {
-    // À implémenter...
+    if(nombre>99){
+         nombre=99; //force à 99
+     }
+    
+     digits[0] = nombre/10;
+     
+     digits[1] = nombre%10;   
+  
 }
 
 unsigned char digit(unsigned char position) {
-    // À implémenter...
-    return 0;
+    // tableau permettant la conversion en BCD 7 segments
+    static unsigned char Tableau_Deci [10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F}; // 5-9
+    
+   if (position == 0) {
+       
+   
+       if(digits[0]==0) return 0; 
+       return Tableau_Deci[digits[0]]; 
+   }
+   else // traitement de l'unité
+   {
+     
+      return  Tableau_Deci[digits[1]];   
+ }
 }
+
 
 
 #ifdef TEST
